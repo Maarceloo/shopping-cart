@@ -40,4 +40,21 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-window.onload = () => { };
+// criei no exercicio 01
+const pegaItens = async () => {
+  const array = await fetchProducts('computador');
+  const local = document.querySelector('.items');
+  return array.results.forEach((elemento) => {
+    const { id, title, thumbnail } = elemento;
+    const obj = {
+      sku: id,
+      name: title,
+      image: thumbnail,
+    };
+    local.appendChild(createProductItemElement(obj));
+  });
+};
+
+window.onload = () => { 
+  pegaItens();
+};
