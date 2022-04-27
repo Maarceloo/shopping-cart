@@ -1,3 +1,5 @@
+const locall = document.querySelector('.cart__items');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -28,10 +30,12 @@ function createProductItemElement({ sku, name, image }) {
 
 function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
+
 }
 
 function cartItemClickListener(event) {
   event.target.parentNode.firstChild.remove();
+  saveCartItems(locall.innerHTML);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -42,17 +46,26 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
+// Exercicio 04
+const carSaved = async () => {
+  const lista = await getSavedCartItems();
+  locall.innerHTML = lista;
+  const li = document.querySelectorAll('.cart__item');
+  li.forEach((elemento) => elemento.addEventListener('click', cartItemClickListener));
+};
+
 // Exercicio 02
 const addCarrinho = async (numero) => {
   const produto = await fetchItem(numero);
-  const local = document.querySelector('.cart__items');
   const { id, title, price } = produto;
   const obj = {
     sku: id,
     name: title,
     salePrice: price,
   };
-  local.appendChild(createCartItemElement(obj));
+  locall.appendChild(createCartItemElement(obj));
+
+  saveCartItems(locall.innerHTML);
 };
 
 const codigoId = async (evento) => {
@@ -80,4 +93,5 @@ const pegaItens = async () => {
 
 window.onload = () => {
   pegaItens();
+  carSaved();
 };
