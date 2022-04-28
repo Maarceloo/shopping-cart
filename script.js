@@ -1,5 +1,5 @@
 const locall = document.querySelector('.cart__items');
-const button = document.querySelector('.empty-cart');
+const button2 = document.querySelector('.empty-cart');
 const divSoma = document.querySelector('.total-price');
 
 function createProductImageElement(imageSource) {
@@ -114,7 +114,7 @@ const pegaItens = async () => {
 };
 
 // Exercicio 06
-button.addEventListener('click', () => {
+button2.addEventListener('click', () => {
   localStorage.clear();
   locall.innerText = '';
 });
