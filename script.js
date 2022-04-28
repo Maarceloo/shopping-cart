@@ -1,4 +1,6 @@
 const locall = document.querySelector('.cart__items');
+const button = document.querySelector('.empty-cart');
+const divSoma = document.querySelector('.total-price');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -35,7 +37,15 @@ function getSkuFromProductItem(item) {
 function cartItemClickListener(event) {
   event.target.parentNode.firstChild.remove();
   saveCartItems(locall.innerHTML);
-}
+
+  // const teste = event.target.innerText;
+  // const retiraValor = parseFloat(teste.split('$')[1], 10);
+  // console.log(retiraValor);
+  // const valor = parseFloat(divSoma.innerHTML, 10);
+  // console.log(valor);
+  // const valorTotal = valor - retiraValor;
+  // divSoma.innerHTML = valorTotal.toFixed(1);
+} 
 
 function createCartItemElement({ sku, name, salePrice }) {
   const li = document.createElement('li');
@@ -44,6 +54,17 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
+
+// Exercicio 05 soma 
+// const somaValor = async (valor) => {
+//   if (divSoma.innerHTML === '') {
+//     divSoma.innerHTML = await parseFloat(valor, 0).toFixed(1);
+//   } else {
+//     const valorAtual = parseFloat(divSoma.innerHTML, 10);
+//     const resultado = valorAtual + parseFloat(valor, 0);
+//     divSoma.innerHTML = resultado.toFixed(1);
+//   }
+// };
 
 // Exercicio 04
 const carSaved = async () => {
@@ -62,8 +83,11 @@ const addCarrinho = async (numero) => {
     name: title,
     salePrice: price,
   };
+
   locall.appendChild(createCartItemElement(obj));
   saveCartItems(locall.innerHTML);
+
+  // somaValor(price);
 };
 
 const codigoId = async (evento) => {
@@ -88,6 +112,12 @@ const pegaItens = async () => {
     button.forEach((item) => item.addEventListener('click', codigoId));
   });
 };
+
+// Exercicio 06
+button.addEventListener('click', () => {
+  localStorage.clear();
+  locall.innerText = '';
+});
 
 window.onload = () => {
   pegaItens();
