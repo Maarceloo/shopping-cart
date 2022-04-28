@@ -63,7 +63,6 @@ const addCarrinho = async (numero) => {
     salePrice: price,
   };
   locall.appendChild(createCartItemElement(obj));
-
   saveCartItems(locall.innerHTML);
 };
 
