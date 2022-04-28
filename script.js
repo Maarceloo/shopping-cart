@@ -38,13 +38,13 @@ function cartItemClickListener(event) {
   event.target.parentNode.firstChild.remove();
   saveCartItems(locall.innerHTML);
 
-  // const teste = event.target.innerText;
-  // const retiraValor = parseFloat(teste.split('$')[1], 10);
-  // console.log(retiraValor);
-  // const valor = parseFloat(divSoma.innerHTML, 10);
-  // console.log(valor);
-  // const valorTotal = valor - retiraValor;
-  // divSoma.innerHTML = valorTotal.toFixed(1);
+  const teste = event.target.innerText;
+  const retiraValor = parseFloat(teste.split('$')[1], 10);
+  console.log(retiraValor);
+  const valor = parseFloat(divSoma.innerHTML, 10);
+  console.log(valor);
+  const valorTotal = valor - retiraValor;
+  divSoma.innerHTML = valorTotal;
 } 
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -56,15 +56,15 @@ function createCartItemElement({ sku, name, salePrice }) {
 }
 
 // Exercicio 05 soma 
-// const somaValor = async (valor) => {
-//   if (divSoma.innerHTML === '') {
-//     divSoma.innerHTML = await parseFloat(valor, 0).toFixed(1);
-//   } else {
-//     const valorAtual = parseFloat(divSoma.innerHTML, 10);
-//     const resultado = valorAtual + parseFloat(valor, 0);
-//     divSoma.innerHTML = resultado.toFixed(1);
-//   }
-// };
+const somaValor = async (valor) => {
+  if (divSoma.innerHTML === '') {
+    divSoma.innerHTML = await parseFloat(valor, 0);
+  } else {
+    const valorAtual = parseFloat(divSoma.innerHTML, 10);
+    const resultado = valorAtual + parseFloat(valor, 0);
+    divSoma.innerHTML = resultado;
+  }
+};
 
 // Exercicio 04
 const carSaved = async () => {
@@ -87,7 +87,7 @@ const addCarrinho = async (numero) => {
   locall.appendChild(createCartItemElement(obj));
   saveCartItems(locall.innerHTML);
 
-  // somaValor(price);
+  somaValor(price);
 };
 
 const codigoId = async (evento) => {
