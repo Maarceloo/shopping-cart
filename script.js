@@ -55,6 +55,18 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
+// Exercicio 07
+function loading() {
+  const carregando = document.createElement('li');
+  carregando.className = 'loading';
+  carregando.innerText = 'carregando...';
+  document.getElementsByClassName('items')[0].appendChild(carregando);
+}
+
+function removeLoading() {
+  document.getElementsByClassName('loading')[0].remove();
+}
+
 // Exercicio 05 soma 
 const somaValor = async (valor) => {
   if (divSoma.innerHTML === '') {
@@ -99,6 +111,7 @@ const codigoId = async (evento) => {
 // Exercicio 01
 const pegaItens = async () => {
   const array = await fetchProducts('computador');
+  removeLoading();
   const local = document.querySelector('.items');
   array.results.forEach((elemento) => {
     const { id, title, thumbnail } = elemento;
@@ -120,6 +133,7 @@ button2.addEventListener('click', () => {
 });
 
 window.onload = () => {
+  loading();
   pegaItens();
   carSaved();
 };
